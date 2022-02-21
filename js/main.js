@@ -1,8 +1,8 @@
 function getRandomNumber (min, max) {
   if (min > max) {
-    const SWAP = min;
+    const swap = min;
     min = max;
-    max = SWAP;
+    max = swap;
   }
   if (min < 0 || max < 0) {
     return null;
@@ -15,9 +15,9 @@ function getRandomNumber (min, max) {
 }
 function getRandomFloat (min, max, digits) {
   if (min > max) {
-    const SWAP = min;
+    const swap = min;
     min = max;
-    max = SWAP;
+    max = swap;
   }
   if (min < 0 || max < 0) {
     return null;
