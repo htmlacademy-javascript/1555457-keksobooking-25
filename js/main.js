@@ -10,7 +10,7 @@ function getRandomNumber (min, max) {
   min = Math.floor(min);
   max = Math.ceil(max);
 
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
   //source: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 }
 function getRandomFloat (min, max, digits) {
@@ -23,7 +23,7 @@ function getRandomFloat (min, max, digits) {
     return null;
   }
 
-  return (Math.random() * (max - min + 1) + min).toFixed(digits);
+  return (Math.random() * (max - min) + min).toFixed(digits);
 }
 getRandomFloat();
 getRandomNumber();
