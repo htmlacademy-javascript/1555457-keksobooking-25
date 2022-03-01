@@ -25,6 +25,7 @@ function getRandomFloat (min, max, digits) {
 
   return (Math.random() * (max - min) + min).toFixed(digits);
 }
+
 const hotelTitles = [ //Со временем названия поменяются для соответсвия картинкам
   'Шикарный апарт-отель',
   'Дом в Геленджике',
@@ -99,3 +100,4 @@ function createLandingArray () {
 getRandomFloat();
 getRandomNumber();
 createLandingArray();
+
