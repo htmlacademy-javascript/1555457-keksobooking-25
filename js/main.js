@@ -85,7 +85,7 @@ function createLandingArray () {
     temp.offer.checkout = checkinOptions[getRandomNumber(0, checkinOptions.length - 1)];
     temp.offer.features = getRandomElements(hotelFeatures);
     temp.offer.description = 'Отель сочетает в себе уют домашнего очага и комфорт современной обстановки. Все номера выходят окнами на тихий закрытый двор, оснащены стеклопакетами и кондиционерами, имеют отдельную туалетную комнату с душевой кабиной и феном.';
-    temp.offer.photos = hotelPhotos.slice(0, getRandomNumber(1, hotelPhotos.length));
+    temp.offer.photos = getRandomElements(hotelPhotos);
 
     landingArray.push(temp);
 
