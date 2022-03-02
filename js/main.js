@@ -106,3 +106,4 @@ function createLandingArray () {
 getRandomFloat();
 getRandomNumber();
 createLandingArray();
+
