@@ -88,8 +88,6 @@ function createLandingArray () {
     temp.offer.photos = getRandomElements(hotelPhotos);
 
     landingArray.push(temp);
-    console.log(temp.offer.checkin)
-
   }
 
   function getRandomElements (array) {
