@@ -81,13 +81,14 @@ function createLandingArray () {
     temp.offer.type = hotelTypes[getRandomNumber(0, hotelTypes.length - 1)];
     temp.offer.rooms = getRandomNumber(1, 5);
     temp.offer.guests = getRandomNumber(1, 15);
-    temp.offer.checkin = checkinOptions[getRandomNumber(0, checkinOptions.length - 1)];
-    temp.offer.checkout = checkinOptions[getRandomNumber(0, checkinOptions.length - 1)];
+    temp.offer.checkin = checkinOptions[getRandomNumber(0, checkinOptions.length)];
+    temp.offer.checkout = checkinOptions[getRandomNumber(0, checkinOptions.length)];
     temp.offer.features = getRandomElements(hotelFeatures);
     temp.offer.description = 'Отель сочетает в себе уют домашнего очага и комфорт современной обстановки. Все номера выходят окнами на тихий закрытый двор, оснащены стеклопакетами и кондиционерами, имеют отдельную туалетную комнату с душевой кабиной и феном.';
     temp.offer.photos = getRandomElements(hotelPhotos);
 
     landingArray.push(temp);
+    console.log(temp.offer.checkin)
 
   }
 
