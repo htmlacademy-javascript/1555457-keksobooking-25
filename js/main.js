@@ -1,4 +1,4 @@
-import {createLandingArray} from './create-landing-array';
+import {createLandingArray} from './create-landing-array.js';
 
 createLandingArray();
 
