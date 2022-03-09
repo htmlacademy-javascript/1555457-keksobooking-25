@@ -1,5 +1,6 @@
 import { getRandomNumber, getRandomFloat } from './random-numbers.js';
 
+
 const HOTEL_TITLES = [
   'Шикарный апарт-отель',
   'Дом в Геленджике',
