@@ -1,43 +1,7 @@
 import { getRandomNumber, getRandomFloat } from './random-numbers.js';
+import {HOTEL_TITLES, HOTEL_TYPES, HOTEL_TYPES_TRANSLATION, CHECKIN_OPTIONS, HOTEL_FEATURES, HOTEL_PHOTOS} from './data.js';
 
 
-const HOTEL_TITLES = [
-  'Шикарный апарт-отель',
-  'Дом в Геленджике',
-  'Уютный номер с видом на море',
-  'Hotel Komo',
-  'Номер на двоих',
-  'Однокомнатная квартира в центре',
-  'Уютный номер с видом на море',
-  'Номер в горах',
-  'Номер на двоих',
-  'Номер на двоих'
-];
-const HOTEL_TYPES = [
-  'palace',
-  'flat',
-  'house',
-  'bungalow',
-  'hotel'
-];
-const CHECKIN_OPTIONS = [
-  '12:00',
-  '13:00',
-  '14:00'
-];
-const HOTEL_FEATURES = [
-  'wifi',
-  'dishwasher',
-  'parking',
-  'washer',
-  'elevator',
-  'conditioner'
-];
-const HOTEL_PHOTOS = [
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
-];
 
 function createLandingArray () {
   const landingArray = [];
@@ -54,7 +18,7 @@ function createLandingArray () {
     temp.location.lng = +getRandomFloat(139.70000, 139.80000, 5);
 
     temp.offer.address = `${temp.location.lat}, ${temp.location.lng}`;
-    temp.offer.title = HOTEL_TITLES[i-1];
+    temp.offer.title =HOTEL_TITLES[getRandomNumber(0, HOTEL_TITLES.length - 1)];
     temp.offer.price = getRandomNumber(2000, 15000);
     temp.offer.type = HOTEL_TYPES[getRandomNumber(0, HOTEL_TYPES.length - 1)];
     temp.offer.rooms = getRandomNumber(1, 5);
@@ -69,10 +33,13 @@ function createLandingArray () {
   }
 
   function getRandomElements (array) {
-    const elementsNumber = getRandomNumber(1, array.length - 1);
+    const elementsNumber = getRandomNumber(1, array.length);
     const tempArray = [];
-    for (let i = 0; i < elementsNumber; i++) {
-      tempArray.push(array[getRandomNumber(1, array.length - 1)]);
+
+    while (tempArray.length < elementsNumber) {
+      const currentEl = array[getRandomNumber(0, array.length - 1)];
+      if (tempArray.indexOf(currentEl) === -1)
+      {tempArray.push(currentEl);}
     }
     return tempArray;
   }
@@ -80,4 +47,4 @@ function createLandingArray () {
   return landingArray;
 }
 
-export {createLandingArray};
+export  {createLandingArray} ;
