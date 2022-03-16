@@ -52,20 +52,20 @@ function generateOffer (dataObject) {
         element.remove();
       }
     });
-} else {isEmpty(dataObject.offer.features, CARD_FEATURES)};
+  } else {isEmpty(dataObject.offer.features, CARD_FEATURES);}
 
   CARD_DESCRIPTION.textContent = dataObject.offer.description;
   isEmpty(dataObject.offer.description, CARD_DESCRIPTION);
 
-if (dataObject.offer.photos) {
-  CARD_PHOTOS.innerHTML = '';
-  dataObject.offer.photos.forEach((url) => {
-    const photo = CARD_PHOTO.cloneNode(true);
-    photo.src = url;
-    CARD_PHOTOS.appendChild(photo);
-  });
-  CARD_AVATAR.src = dataObject.author.avatar;
-} else {isEmpty(dataObject.offer.photos, CARD_PHOTOS)};
+  if (dataObject.offer.photos) {
+    CARD_PHOTOS.innerHTML = '';
+    dataObject.offer.photos.forEach((url) => {
+      const photo = CARD_PHOTO.cloneNode(true);
+      photo.src = url;
+      CARD_PHOTOS.appendChild(photo);
+    });
+    CARD_AVATAR.src = dataObject.author.avatar;
+  } else {isEmpty(dataObject.offer.photos, CARD_PHOTOS);}
 
   MAP_CANVAS.appendChild(CARD);
 }
