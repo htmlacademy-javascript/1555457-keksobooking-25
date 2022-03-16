@@ -1,6 +1,5 @@
 import { getRandomNumber, getRandomFloat } from './random-numbers.js';
-import {HOTEL_TITLES, HOTEL_TYPES, HOTEL_TYPES_TRANSLATION, CHECKIN_OPTIONS, HOTEL_FEATURES, HOTEL_PHOTOS} from './data.js';
-
+import {HOTEL_TITLES, HOTEL_TYPES, CHECKIN_OPTIONS, HOTEL_FEATURES, HOTEL_PHOTOS} from './data.js';
 
 
 function createLandingArray () {

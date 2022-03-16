@@ -41,17 +41,23 @@ function generateOffer (dataObject) {
   isEmpty(dataObject.offer.guests, CARD_CAPACITY);
 
   CARD_TIME.textContent = `Заезд после ${dataObject.offer.checkin}, выезд до ${dataObject.offer.checkout}`;
+  isEmpty(dataObject.offer.checkin, CARD_TIME);
+  isEmpty(dataObject.offer.checkout, CARD_TIME);
 
+  if (dataObject.offer.features) {
+    const modifiers = dataObject.offer.features.map((feature) => `popup__feature--${feature}`);
+    CARD_FEATURES.forEach((element) => {
+      const modifier = element.classList[1];
+      if (!modifiers.includes(modifier)) {
+        element.remove();
+      }
+    });
+} else {isEmpty(dataObject.offer.features, CARD_FEATURES)};
 
-  const modifiers = dataObject.offer.features.map((feature) => `popup__feature--${feature}`);
-  CARD_FEATURES.forEach((element) => {
-    const modifier = element.classList[1];
-    if (!modifiers.includes(modifier)) {
-      element.remove();
-    }
-  });
   CARD_DESCRIPTION.textContent = dataObject.offer.description;
+  isEmpty(dataObject.offer.description, CARD_DESCRIPTION);
 
+if (dataObject.offer.photos) {
   CARD_PHOTOS.innerHTML = '';
   dataObject.offer.photos.forEach((url) => {
     const photo = CARD_PHOTO.cloneNode(true);
@@ -59,6 +65,7 @@ function generateOffer (dataObject) {
     CARD_PHOTOS.appendChild(photo);
   });
   CARD_AVATAR.src = dataObject.author.avatar;
+} else {isEmpty(dataObject.offer.photos, CARD_PHOTOS)};
 
   MAP_CANVAS.appendChild(CARD);
 }
