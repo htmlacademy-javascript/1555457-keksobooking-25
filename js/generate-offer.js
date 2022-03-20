@@ -3,10 +3,21 @@ import {HOTEL_TYPES, HOTEL_TYPES_TRANSLATION} from './data.js';
 const CARD_TEMPLATE = document.querySelector('#card').content;
 const MAP_CANVAS = document.querySelector('#map-canvas');
 
-function isEmpty (data, element) {
-  if (!data) {
-    element.classList.add('hidden');
+function getCapacityText (rooms, guests) {
+  let hotelCapacityText = ' комнаты для ';
+  let hotelGuestsText = ' гостей';
+
+  if (rooms === 1) {
+    hotelCapacityText = ' комната для ';
   }
+  if (rooms > 4) {
+    hotelCapacityText = ' комнат для ';
+  }
+
+  if (guests === 1) {
+    hotelGuestsText = ' гостя';
+  }
+  return String(rooms + hotelCapacityText + guests + hotelGuestsText);
 }
 
 function generateOffer (dataObject) {
@@ -24,25 +35,40 @@ function generateOffer (dataObject) {
   const CARD_PHOTO = CARD.querySelector('.popup__photo');
   const CARD_AVATAR = CARD.querySelector('.popup__avatar');
 
-  CARD_TITLE.textContent = dataObject.offer.title;
-  isEmpty(dataObject.offer.title, CARD_TITLE);
+  if (dataObject.offer.title)  {
+    CARD_TITLE.textContent = dataObject.offer.title;
+  } else {
+    CARD_TITLE.classList.add('hidden');
+  }
 
-  CARD_ADDRESS.textContent = dataObject.offer.address;
-  isEmpty(dataObject.offer.address, CARD_ADDRESS);
+  if (dataObject.offer.address)  {
+    CARD_ADDRESS.textContent = dataObject.offer.address;
+  } else {
+    CARD_ADDRESS.classList.add('hidden');
+  }
 
-  CARD_PRICE.textContent = `${dataObject.offer.price}  ₽/ночь`;
-  isEmpty(dataObject.offer.price, CARD_PRICE);
+  if (dataObject.offer.price)  {
+    CARD_PRICE.textContent = `${dataObject.offer.price}  ₽/ночь`;
+  } else {
+    CARD_PRICE.classList.add('hidden');
+  }
 
-  CARD_HOTEL_TYPE.textContent = HOTEL_TYPES_TRANSLATION[HOTEL_TYPES.indexOf(dataObject.offer.type)];
-  isEmpty(dataObject.offer.type, CARD_HOTEL_TYPE);
+  if (dataObject.offer.type)  {
+    CARD_HOTEL_TYPE.textContent = HOTEL_TYPES_TRANSLATION[HOTEL_TYPES.indexOf(dataObject.offer.type)];
+  } else {
+    CARD_HOTEL_TYPE.classList.add('hidden');
+  }
+  if (dataObject.offer.guests && dataObject.offer.rooms) {
+    CARD_CAPACITY.textContent = getCapacityText(dataObject.offer.rooms, dataObject.offer.guests);
+  } else {
+    CARD_CAPACITY.classList.add('hidden');
+  }
 
-  CARD_CAPACITY.textContent = `${dataObject.offer.rooms} комнаты для ${dataObject.offer.guests} гостей`;
-  isEmpty(dataObject.offer.rooms, CARD_CAPACITY);
-  isEmpty(dataObject.offer.guests, CARD_CAPACITY);
-
-  CARD_TIME.textContent = `Заезд после ${dataObject.offer.checkin}, выезд до ${dataObject.offer.checkout}`;
-  isEmpty(dataObject.offer.checkin, CARD_TIME);
-  isEmpty(dataObject.offer.checkout, CARD_TIME);
+  if (dataObject.offer.checkin && dataObject.offer.checkout) {
+    CARD_TIME.textContent = `Заезд после ${dataObject.offer.checkin}, выезд до ${dataObject.offer.checkout}`;
+  } else {
+    CARD_TIME.classList.add('hidden');
+  }
 
   if (dataObject.offer.features) {
     const modifiers = dataObject.offer.features.map((feature) => `popup__feature--${feature}`);
@@ -52,10 +78,13 @@ function generateOffer (dataObject) {
         element.remove();
       }
     });
-  } else {isEmpty(dataObject.offer.features, CARD_FEATURES);}
+  } else {CARD_FEATURES.classList.add('hidden');}
 
-  CARD_DESCRIPTION.textContent = dataObject.offer.description;
-  isEmpty(dataObject.offer.description, CARD_DESCRIPTION);
+  if (dataObject.offer.description) {
+    CARD_DESCRIPTION.textContent = dataObject.offer.description;
+  } else {
+    CARD_DESCRIPTION.classList.add('hidden');
+  }
 
   if (dataObject.offer.photos) {
     CARD_PHOTOS.innerHTML = '';
@@ -64,8 +93,13 @@ function generateOffer (dataObject) {
       photo.src = url;
       CARD_PHOTOS.appendChild(photo);
     });
+  } else {CARD_PHOTOS.classList.add('hidden');}
+
+  if (dataObject.author.avatar) {
     CARD_AVATAR.src = dataObject.author.avatar;
-  } else {isEmpty(dataObject.offer.photos, CARD_PHOTOS);}
+  } else {
+    CARD_AVATAR.classList.add('hidden');
+  }
 
   MAP_CANVAS.appendChild(CARD);
 }

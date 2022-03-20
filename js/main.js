@@ -1,7 +1,6 @@
 import {createLandingArray} from './create-landing-array.js';
 import {generateOffer} from './generate-offer.js';
 
-createLandingArray();
-const el = createLandingArray();
-generateOffer(el[1]);
+const CARD_DATA = createLandingArray();
+generateOffer(CARD_DATA[1]);
 
