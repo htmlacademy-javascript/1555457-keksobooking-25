@@ -42,4 +42,10 @@ const HOTEL_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
-export {HOTEL_TITLES, HOTEL_TYPES, HOTEL_TYPES_TRANSLATION, CHECKIN_OPTIONS, HOTEL_FEATURES, HOTEL_PHOTOS};
+const ROOMS_VALIDATION_PARAMS = {
+  1: [1],
+  2: [1, 2],
+  3: [1, 2, 3],
+  100: [0]
+};
+export {HOTEL_TITLES, HOTEL_TYPES, HOTEL_TYPES_TRANSLATION, CHECKIN_OPTIONS, HOTEL_FEATURES, HOTEL_PHOTOS, ROOMS_VALIDATION_PARAMS};
