@@ -1,7 +1,6 @@
 import {HOTEL_TYPES, HOTEL_TYPES_TRANSLATION} from './data.js';
 
 const CARD_TEMPLATE = document.querySelector('#card').content;
-const MAP_CANVAS = document.querySelector('#map-canvas');
 
 function getCapacityText (rooms, guests) {
   let hotelCapacityText = ' комнаты для ';
@@ -101,6 +100,6 @@ function generateOffer (dataObject) {
     CARD_AVATAR.classList.add('hidden');
   }
 
-  MAP_CANVAS.appendChild(CARD);
+  return CARD;
 }
 export {generateOffer};
