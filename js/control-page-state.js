@@ -5,5 +5,9 @@ function enableForm() {
   FORM.removeAttribute('disabled');
   FIELDS.forEach((element) => element.removeAttribute('disabled'));
 }
+function disableForm() {
+  FORM.setAttribute('disabled');
+  FIELDS.forEach((element) => element.setAttribute('disabled'));
+}
 
-export { enableForm };
+export { enableForm, disableForm };

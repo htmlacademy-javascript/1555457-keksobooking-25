@@ -1,6 +1,6 @@
 import { generateOffer } from './generate-offer.js';
 import { createLandingArray } from './create-landing-array.js';
-import { enableForm } from './enable-page.js';
+import { enableForm } from './control-page-state.js';
 
 const landingArray = createLandingArray();
 
