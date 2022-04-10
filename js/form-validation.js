@@ -1,10 +1,14 @@
 import {ROOMS_VALIDATION_PARAMS} from './data.js';
 import { MAIN_MARKER } from './map.js';
+import { showFailMessage, showSuccessMessage } from './form-tools.js';
+import { sendData } from './server-api.js';
+import { clearForm } from './control-page-state.js';
 
 const OFFER_FORM = document.querySelector('.ad-form');
 const GUESTS_SELECT = OFFER_FORM.querySelector('#capacity');
 const ADDRESS = document.querySelector('#address');
 const PRICE_INPUT = OFFER_FORM.querySelector('#price');
+const CLEAR_BUTTON = document.querySelector('.ad-form__reset');
 
 const pristine = new Pristine(OFFER_FORM, {
   classTo: 'ad-form__element',
@@ -24,9 +28,11 @@ pristine.addValidator(OFFER_FORM.querySelector('#room_number'), validateRooms, '
 OFFER_FORM.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
-    OFFER_FORM.submit();
+    const FORM_DATA = new FormData(evt.target);
+    sendData(showSuccessMessage, showFailMessage, FORM_DATA);
   }
 });
+
 
 const PRICE_SLIDER = OFFER_FORM.querySelector('.ad-form__slider');
 noUiSlider.create(PRICE_SLIDER, {
@@ -50,5 +56,9 @@ PRICE_INPUT.addEventListener('change', () => {
 ADDRESS.value = '35.6895, 139.6917';
 MAIN_MARKER.on('drag', () => {
   ADDRESS.value = String(MAIN_MARKER.getLatLng()).replace(/[a-z()]/gi, '');
+  CLEAR_BUTTON.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    clearForm();
+  });
 });
 
