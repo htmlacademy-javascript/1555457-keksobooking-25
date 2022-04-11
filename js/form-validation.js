@@ -1,4 +1,4 @@
-import {ROOMS_VALIDATION_PARAMS} from './data.js';
+import {ROOMS_VALIDATION_PARAMS, MIN_PRICE_PARAMS} from './data.js';
 import { MAIN_MARKER } from './map.js';
 import { showFailMessage, showSuccessMessage } from './form-tools.js';
 import { sendData } from './server-api.js';
@@ -9,6 +9,10 @@ const GUESTS_SELECT = OFFER_FORM.querySelector('#capacity');
 const ADDRESS = document.querySelector('#address');
 const PRICE_INPUT = OFFER_FORM.querySelector('#price');
 const CLEAR_BUTTON = document.querySelector('.ad-form__reset');
+const HOTEL_TYPE_INPUT = document.querySelector('#type');
+const TIMEIN = document.querySelector('#timein');
+const TIMEOUT = document.querySelector('#timeout');
+
 
 const pristine = new Pristine(OFFER_FORM, {
   classTo: 'ad-form__element',
@@ -60,5 +64,15 @@ MAIN_MARKER.on('drag', () => {
     evt.preventDefault();
     clearForm();
   });
+});
+HOTEL_TYPE_INPUT.addEventListener('change', () => {
+  PRICE_INPUT.value = MIN_PRICE_PARAMS[HOTEL_TYPE_INPUT.value];
+  PRICE_INPUT.setAttribute('min', MIN_PRICE_PARAMS[HOTEL_TYPE_INPUT.value]);
+});
+TIMEIN.addEventListener('change', () => {
+  TIMEOUT.value = TIMEIN.value;
+});
+TIMEOUT.addEventListener('change', () => {
+  TIMEIN.value = TIMEOUT.value;
 });
 
