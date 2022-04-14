@@ -14,14 +14,17 @@ const FORM_ROOM_NUMBER = FORM.querySelector('#room_number');
 const FORM_CAPACITY = FORM.querySelector('#capacity');
 const FORM_FEEATURE_CHECKBOXES = FORM.querySelectorAll('input[type="checkbox"][name="feature"]');
 const FORM_DESCRIPTION = FORM.querySelector('#description');
+const MAP_FILTERS = document.querySelector('.map__filters-container');
 
 function enableForm () {
   FORM.removeAttribute('disabled');
   FIELDS.forEach((element) => element.removeAttribute('disabled'));
+  MAP_FILTERS.classList.remove('hidden');
 }
 function disableForm () {
   FORM.setAttribute('disabled');
   FIELDS.forEach((element) => element.setAttribute('disabled'));
+  MAP_FILTERS.classList.add('hidden');
 }
 function clearForm () {
   FORM_AVATAR.value = '';

@@ -60,10 +60,6 @@ PRICE_INPUT.addEventListener('change', () => {
 ADDRESS.value = '35.6895, 139.6917';
 MAIN_MARKER.on('drag', () => {
   ADDRESS.value = String(MAIN_MARKER.getLatLng()).replace(/[a-z()]/gi, '');
-  CLEAR_BUTTON.addEventListener('click', (evt) => {
-    evt.preventDefault();
-    clearForm();
-  });
 });
 HOTEL_TYPE_INPUT.addEventListener('change', () => {
   PRICE_INPUT.value = MIN_PRICE_PARAMS[HOTEL_TYPE_INPUT.value];
@@ -75,4 +71,7 @@ TIMEIN.addEventListener('change', () => {
 TIMEOUT.addEventListener('change', () => {
   TIMEIN.value = TIMEOUT.value;
 });
-
+CLEAR_BUTTON.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  clearForm();
+});

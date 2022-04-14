@@ -1,6 +1,7 @@
 import { generateOffer } from './generate-offer.js';
 import { enableForm } from './control-page-state.js';
 import { loadData } from './server-api.js';
+import { checkHotelData, FILTERS_FORM } from './map-filters.js';
 
 const MAP = L.map('map-canvas');
 
@@ -41,8 +42,10 @@ L.tileLayer(
 ).addTo(MAP);
 
 MAIN_MARKER.addTo(MAP);
-
+const MARKERS = L.layerGroup().addTo(MAP);
 function renderMarkers (hotels) {
+  hotels = hotels.filter((hotel) => checkHotelData(hotel));
+  MARKERS.clearLayers();
   hotels.slice(0, 10).forEach((element) => {
     const MARKER = L.marker(
       {
@@ -53,7 +56,7 @@ function renderMarkers (hotels) {
         icon: PIN_ICON,
       },
     );
-    MARKER.addTo(MAP);
+    MARKER.addTo(MARKERS);
 
     MARKER.on('click', (evt) => {
       const POPUP = L.popup().setContent(generateOffer(element));
@@ -81,5 +84,5 @@ function showErrorMessage (errorMessage) {
   errorBlock.innerHTML = `<p style="text-align: center;">${errorMessage}</p>`;
   mapCanvas.appendChild(errorBlock);
 }
-
+FILTERS_FORM.addEventListener('change', () => loadData());
 export { MAIN_MARKER, renderMarkers, showErrorMessage };
