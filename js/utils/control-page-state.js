@@ -1,4 +1,4 @@
-import { MAIN_MARKER } from './map.js';
+import { MAIN_MARKER } from '../map.js';
 
 const FORM = document.querySelector('.ad-form');
 const FIELDS = FORM.querySelectorAll('fieldset');
@@ -31,7 +31,7 @@ function clearForm () {
   FORM_OFFER_TITLE.value = '';
   FORM_ADDRESS.value = '35.6895, 139.6917';
   FORM_OFFER_TYPE.value = 'flat';
-  FORM_OFFER_PRICE.value = 5000;
+  FORM_OFFER_PRICE.value = 1000;
   FORM_TIMEIN.value = '12:00';
   FORM_TIMEOUT.value = '12:00';
   FORM_ROOM_NUMBER.value = 1;

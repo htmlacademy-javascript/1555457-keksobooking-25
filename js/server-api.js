@@ -1,5 +1,5 @@
 import { renderMarkers, showErrorMessage } from './map.js';
-import { clearForm } from './control-page-state.js';
+import { clearForm } from './utils/control-page-state.js';
 
 function loadData() {
   fetch('https://25.javascript.pages.academy/keksobooking/data')

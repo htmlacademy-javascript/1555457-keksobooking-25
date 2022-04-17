@@ -1,7 +1,7 @@
-import { generateOffer } from './generate-offer.js';
-import { enableForm } from './control-page-state.js';
+import { generateOffer } from './utils/generate-offer.js';
+import { enableForm } from './utils/control-page-state.js';
 import { loadData } from './server-api.js';
-import { checkHotelData, FILTERS_FORM } from './map-filters.js';
+import { checkHotelData, FILTERS_FORM } from './utils/map-filters.js';
 
 const MAP = L.map('map-canvas');
 
@@ -43,6 +43,7 @@ L.tileLayer(
 
 MAIN_MARKER.addTo(MAP);
 const MARKERS = L.layerGroup().addTo(MAP);
+
 function renderMarkers (hotels) {
   hotels = hotels.filter((hotel) => checkHotelData(hotel));
   MARKERS.clearLayers();

@@ -23,5 +23,4 @@ function showFailMessage () {
   });
 }
 
-
 export { showFailMessage, showSuccessMessage };
