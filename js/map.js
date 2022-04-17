@@ -2,6 +2,8 @@ import { generateOffer } from './utils/generate-offer.js';
 import { enableForm } from './utils/control-page-state.js';
 import { loadData } from './server-api.js';
 import { checkHotelData, FILTERS_FORM } from './utils/map-filters.js';
+import { debounce } from './utils/form-tools.js';
+
 
 const MAP = L.map('map-canvas');
 
@@ -85,5 +87,7 @@ function showErrorMessage (errorMessage) {
   errorBlock.innerHTML = `<p style="text-align: center;">${errorMessage}</p>`;
   mapCanvas.appendChild(errorBlock);
 }
-FILTERS_FORM.addEventListener('change', () => loadData());
+FILTERS_FORM.addEventListener('change', () => {
+  debounce(loadData());
+});
 export { MAIN_MARKER, renderMarkers, showErrorMessage };
