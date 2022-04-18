@@ -1,4 +1,4 @@
-import { MAIN_MARKER } from './map.js';
+import { MAIN_MARKER } from '../map.js';
 
 const FORM = document.querySelector('.ad-form');
 const FIELDS = FORM.querySelectorAll('fieldset');
@@ -14,21 +14,24 @@ const FORM_ROOM_NUMBER = FORM.querySelector('#room_number');
 const FORM_CAPACITY = FORM.querySelector('#capacity');
 const FORM_FEEATURE_CHECKBOXES = FORM.querySelectorAll('input[type="checkbox"][name="feature"]');
 const FORM_DESCRIPTION = FORM.querySelector('#description');
+const MAP_FILTERS = document.querySelector('.map__filters-container');
 
 function enableForm () {
   FORM.removeAttribute('disabled');
   FIELDS.forEach((element) => element.removeAttribute('disabled'));
+  MAP_FILTERS.classList.remove('hidden');
 }
 function disableForm () {
   FORM.setAttribute('disabled');
   FIELDS.forEach((element) => element.setAttribute('disabled'));
+  MAP_FILTERS.classList.add('hidden');
 }
 function clearForm () {
   FORM_AVATAR.value = '';
   FORM_OFFER_TITLE.value = '';
   FORM_ADDRESS.value = '35.6895, 139.6917';
   FORM_OFFER_TYPE.value = 'flat';
-  FORM_OFFER_PRICE.value = 5000;
+  FORM_OFFER_PRICE.value = 1000;
   FORM_TIMEIN.value = '12:00';
   FORM_TIMEOUT.value = '12:00';
   FORM_ROOM_NUMBER.value = 1;
