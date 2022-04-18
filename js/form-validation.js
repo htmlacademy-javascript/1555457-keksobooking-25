@@ -1,6 +1,7 @@
 import {ROOMS_VALIDATION_PARAMS } from './utils/data.js';
 import { showFailMessage, showSuccessMessage } from './utils/form-tools.js';
 import { sendData } from './server-api.js';
+import { resetFilters } from './utils/map-filters.js';
 
 const OFFER_FORM = document.querySelector('.ad-form');
 const GUESTS_SELECT = OFFER_FORM.querySelector('#capacity');
@@ -25,6 +26,7 @@ OFFER_FORM.addEventListener('submit', (evt) => {
   if (pristine.validate()) {
     const FORM_DATA = new FormData(evt.target);
     sendData(showSuccessMessage, showFailMessage, FORM_DATA);
+    resetFilters();
   }
 });
 

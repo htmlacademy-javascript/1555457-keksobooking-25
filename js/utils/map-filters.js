@@ -74,5 +74,14 @@ function checkHotelData (element) {
   }
   return counter === 5;
 }
+function resetFilters () {
+  FILTER_TYPE.value = 'any';
+  FILTER_PRICE.value = 'any';
+  FILTER_GUESTS.value = 'any';
+  FILTER_ROOMS.value = 'any';
+  FILTER_FEATURES_CHECKBOXES.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+}
 
-export { checkHotelData, FILTERS_FORM };
+export { checkHotelData, FILTERS_FORM, resetFilters };

@@ -36,6 +36,10 @@ const MAIN_MARKER = L.marker({
   icon: MAIN_PIN_ICON
 });
 
+MAIN_MARKER.on('drag', () => {
+  document.querySelector('#address').value = String(MAIN_MARKER.getLatLng()).replace(/[a-z()]/gi, '');
+});
+
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
   {
@@ -88,6 +92,6 @@ function showErrorMessage (errorMessage) {
   mapCanvas.appendChild(errorBlock);
 }
 FILTERS_FORM.addEventListener('change', () => {
-  debounce(loadData());
+  debounce(loadData, 500);
 });
 export { MAIN_MARKER, renderMarkers, showErrorMessage };
