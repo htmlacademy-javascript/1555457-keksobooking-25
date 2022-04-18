@@ -18,6 +18,11 @@ function showSuccessMessage () {
   document.addEventListener('click', () => {
     shownMessage.style.display = 'none';
   });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      shownMessage.style.display = 'none';
+    }
+  });
 }
 function showFailMessage () {
   shownMessage = document.querySelector('div.error');
@@ -25,13 +30,16 @@ function showFailMessage () {
   document.addEventListener('click', () => {
     shownMessage.remove();
   });
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      shownMessage.style.display = 'none';
+    }
+  });
 }
 const debounce = (callback, timeoutDelay) => {
-  let timeoutId;
-  return (...rest) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
-  };
+  setTimeout(() => {
+    callback();
+  }, timeoutDelay);
 };
 
 export { showFailMessage, showSuccessMessage, debounce };

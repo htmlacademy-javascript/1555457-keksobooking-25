@@ -21,4 +21,5 @@ function sendData(success, fail, body) {
       }
     });
 }
+
 export {loadData, sendData};
