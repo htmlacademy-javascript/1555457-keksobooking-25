@@ -1,11 +1,14 @@
 import { generateOffer } from './utils/generate-offer.js';
 import { enableForm } from './utils/control-page-state.js';
 import { loadData } from './server-api.js';
-import { checkHotelData, FILTERS_FORM } from './utils/map-filters.js';
+import { checkHotelData, filtersForm } from './utils/map-filters.js';
 import { debounce } from './utils/form-tools.js';
+import { DEFAULT_LAT, DEFAULT_LNG, DEFAULT_TIMING } from './utils/data.js';
 
 
 const MAP = L.map('map-canvas');
+const errorBlock = document.createElement('div');
+const mapCanvas = document.querySelector('.map');
 
 MAP.on('load', () => {
   enableForm();
@@ -13,8 +16,8 @@ MAP.on('load', () => {
 });
 
 MAP.setView({
-  lat: 35.6895,
-  lng: 139.6917
+  lat: DEFAULT_LAT,
+  lng: DEFAULT_LNG
 }, 12);
 
 const MAIN_PIN_ICON = L.icon({
@@ -29,15 +32,18 @@ const PIN_ICON = L.icon({
 });
 
 const MAIN_MARKER = L.marker({
-  lat: 35.6895,
-  lng: 139.6917
+  lat: DEFAULT_LAT,
+  lng: DEFAULT_LNG
 }, {
   draggable: true,
   icon: MAIN_PIN_ICON
 });
 
 MAIN_MARKER.on('drag', () => {
-  document.querySelector('#address').value = String(MAIN_MARKER.getLatLng()).replace(/[a-z()]/gi, '');
+  let mainMarkerPos = MAIN_MARKER.getLatLng();
+  mainMarkerPos.lat = mainMarkerPos.lat.toFixed(5);
+  mainMarkerPos.lng = mainMarkerPos.lng.toFixed(5);
+  document.querySelector('#address').value = String(mainMarkerPos).replace(/[a-z()]/gi, '');
 });
 
 L.tileLayer(
@@ -74,13 +80,10 @@ function renderMarkers (hotels) {
     });
   });
 }
-
 function showErrorMessage (errorMessage) {
-  const errorBlock = document.createElement('div');
-  const mapCanvas = document.querySelector('.map');
-
+  
   errorBlock.style.position = 'absolute';
-  errorBlock.style.zIndex = 1000;
+  errorBlock.style.zIndex = '1000';
   errorBlock.style.width = '300px';
   errorBlock.style.height = '50px';
   errorBlock.style.marginLeft = 'calc(50% - 150px)';
@@ -91,7 +94,7 @@ function showErrorMessage (errorMessage) {
   errorBlock.innerHTML = `<p style="text-align: center;">${errorMessage}</p>`;
   mapCanvas.appendChild(errorBlock);
 }
-FILTERS_FORM.addEventListener('change', () => {
-  debounce(loadData, 500);
+filtersForm.addEventListener('change', () => {
+  debounce(loadData, DEFAULT_TIMING);
 });
 export { MAIN_MARKER, renderMarkers, showErrorMessage };

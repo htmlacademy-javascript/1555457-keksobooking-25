@@ -1,18 +1,20 @@
 import { clearForm } from './utils/control-page-state.js';
 import { MIN_PRICE_PARAMS } from './utils/data.js';
+import { DEFAULT_ADDRESS_VALUE } from './utils/data.js';
 
 
-const ADDRESS = document.querySelector('#address');
-const PRICE_INPUT = document.querySelector('#price');
-const CLEAR_BUTTON = document.querySelector('.ad-form__reset');
-const HOTEL_TYPE_INPUT = document.querySelector('#type');
-const TIMEIN = document.querySelector('#timein');
-const TIMEOUT = document.querySelector('#timeout');
-const AVATAR_FIELD = document.querySelector('.ad-form__field input[type=file]');
-const AVATAR_PREVIEW = document.querySelector('.ad-form-header__preview img');
-const HOTEL_PHOTO_FIELD = document.querySelector('.ad-form__upload input[type=file]');
-const HOTEL_PHOTO_PREVIEW = document.querySelector('.ad-form__photo');
+const address = document.querySelector('#address');
+const priceInput = document.querySelector('#price');
+const clearButton = document.querySelector('.ad-form__reset');
+const hotelTypeInput = document.querySelector('#type');
+const timein = document.querySelector('#timein');
+const timeout = document.querySelector('#timeout');
+const avatarField = document.querySelector('.ad-form__field input[type=file]');
+const avatarPreview = document.querySelector('.ad-form-header__preview img');
+const hotelPhotoField = document.querySelector('.ad-form__upload input[type=file]');
+const hotelPhotoPreview = document.querySelector('.ad-form__photo');
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
 
 const PRICE_SLIDER = document.querySelector('.ad-form__slider');
 noUiSlider.create(PRICE_SLIDER, {
@@ -26,54 +28,54 @@ noUiSlider.create(PRICE_SLIDER, {
 });
 
 PRICE_SLIDER.noUiSlider.on('update', () => {
-  PRICE_INPUT.value = (+PRICE_SLIDER.noUiSlider.get()).toFixed(0);
+  priceInput.value = (+PRICE_SLIDER.noUiSlider.get()).toFixed(0);
 });
 
-PRICE_INPUT.addEventListener('change', () => {
-  PRICE_SLIDER.noUiSlider.set(PRICE_INPUT.value);
+priceInput.addEventListener('change', () => {
+  PRICE_SLIDER.noUiSlider.set(priceInput.value);
 });
 
-ADDRESS.value = '35.6895, 139.6917';
+address.value = DEFAULT_ADDRESS_VALUE;
 
 
-HOTEL_TYPE_INPUT.addEventListener('change', () => {
-  PRICE_INPUT.value = MIN_PRICE_PARAMS[HOTEL_TYPE_INPUT.value];
-  PRICE_INPUT.setAttribute('min', MIN_PRICE_PARAMS[HOTEL_TYPE_INPUT.value]);
+hotelTypeInput.addEventListener('change', () => {
+  priceInput.value = MIN_PRICE_PARAMS[hotelTypeInput.value];
+  priceInput.setAttribute('min', MIN_PRICE_PARAMS[hotelTypeInput.value]);
 });
 
-TIMEIN.addEventListener('change', () => {
-  TIMEOUT.value = TIMEIN.value;
+timein.addEventListener('change', () => {
+  timeout.value = timein.value;
 });
 
-TIMEOUT.addEventListener('change', () => {
-  TIMEIN.value = TIMEOUT.value;
+timeout.addEventListener('change', () => {
+  timein.value = timeout.value;
 });
 
-CLEAR_BUTTON.addEventListener('click', (evt) => {
+clearButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearForm();
 });
 
-AVATAR_FIELD.addEventListener('change', () => {
-  const FILE = AVATAR_FIELD.files[0];
+avatarField.addEventListener('change', () => {
+  const FILE = avatarField.files[0];
   const FILENAME = FILE.name.toLowerCase();
 
   const matches = FILE_TYPES.some((it) => FILENAME.endsWith(it));
 
   if (matches) {
-    AVATAR_PREVIEW.src = URL.createObjectURL(FILE);
+    avatarPreview.src = URL.createObjectURL(FILE);
   }
 });
-HOTEL_PHOTO_FIELD.addEventListener('change', () => {
-  const FILE = HOTEL_PHOTO_FIELD.files[0];
+hotelPhotoField.addEventListener('change', () => {
+  const FILE = hotelPhotoField.files[0];
 
   const FILENAME = FILE.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => FILENAME.endsWith(it));
 
   if (matches) {
-    HOTEL_PHOTO_PREVIEW.style.backgroundImage = `url("${URL.createObjectURL(FILE)}")`;
-    HOTEL_PHOTO_PREVIEW.style.backgroundSize = 'cover';
+    hotelPhotoPreview.style.backgroundImage = `url("${URL.createObjectURL(FILE)}")`;
+    hotelPhotoPreview.style.backgroundSize = 'cover';
   }
 });
 
-export {PRICE_SLIDER, AVATAR_PREVIEW, HOTEL_PHOTO_PREVIEW, AVATAR_FIELD, HOTEL_PHOTO_FIELD};
+export {PRICE_SLIDER, avatarPreview, hotelPhotoPreview, avatarField, hotelPhotoField};
