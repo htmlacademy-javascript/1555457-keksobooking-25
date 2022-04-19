@@ -48,7 +48,7 @@ function checkFeatures(filter, features) {
   if (!filter) {
     return true;
   }
-  return filter.every((feature) => features.indexOf(feature) > -1)
+  return filter.every((feature) => features.indexOf(feature) > -1);
 }
 
 function checkHotelData (element) {

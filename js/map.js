@@ -40,7 +40,7 @@ const MAIN_MARKER = L.marker({
 });
 
 MAIN_MARKER.on('drag', () => {
-  let mainMarkerPos = MAIN_MARKER.getLatLng();
+  const mainMarkerPos = MAIN_MARKER.getLatLng();
   mainMarkerPos.lat = mainMarkerPos.lat.toFixed(5);
   mainMarkerPos.lng = mainMarkerPos.lng.toFixed(5);
   document.querySelector('#address').value = String(mainMarkerPos).replace(/[a-z()]/gi, '');
@@ -81,7 +81,6 @@ function renderMarkers (hotels) {
   });
 }
 function showErrorMessage (errorMessage) {
-  
   errorBlock.style.position = 'absolute';
   errorBlock.style.zIndex = '1000';
   errorBlock.style.width = '300px';
