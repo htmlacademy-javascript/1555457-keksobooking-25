@@ -1,19 +1,19 @@
-const FILTERS_FORM  = document.querySelector('.map__filters');
-const FILTER_TYPE = FILTERS_FORM.querySelector('#housing-type');
-const FILTER_PRICE = FILTERS_FORM.querySelector('#housing-price');
-const FILTER_ROOMS = FILTERS_FORM.querySelector('#housing-rooms');
-const FILTER_GUESTS = FILTERS_FORM.querySelector('#housing-guests');
-const FILTER_FEATURES = FILTERS_FORM.querySelector('#housing-features');
-const FILTER_FEATURES_CHECKBOXES = Array.from(FILTER_FEATURES.querySelectorAll('input'));
+const filtersForm  = document.querySelector('.map__filters');
+const filterType = filtersForm.querySelector('#housing-type');
+const filterPrice = filtersForm.querySelector('#housing-price');
+const filterRooms = filtersForm.querySelector('#housing-rooms');
+const filterGuests = filtersForm.querySelector('#housing-guests');
+const filterFeatures = filtersForm.querySelector('#housing-features');
+const filterFeaturesCheckboxes = Array.from(filterFeatures.querySelectorAll('input'));
 
 function getFiltersState() {
   const temp = {};
   temp.features = [];
-  if (FILTER_TYPE.value !== 'any') {
-    temp.type = FILTER_TYPE.value;
+  if (filterType.value !== 'any') {
+    temp.type = filterType.value;
   }
 
-  switch (FILTER_PRICE.value) {
+  switch (filterPrice.value) {
     case 'low':
       temp.price = [0, 9999];
       break;
@@ -25,15 +25,15 @@ function getFiltersState() {
       break;
   }
 
-  if (FILTER_ROOMS.value !== 'any') {
-    temp.rooms = FILTER_ROOMS.value;
+  if (filterRooms.value !== 'any') {
+    temp.rooms = filterRooms.value;
   }
 
-  if (FILTER_GUESTS.value !== 'any') {
-    temp.guests = FILTER_GUESTS.value;
+  if (filterGuests.value !== 'any') {
+    temp.guests = filterGuests.value;
   }
 
-  FILTER_FEATURES_CHECKBOXES.forEach((element) => {
+  filterFeaturesCheckboxes.forEach((element) => {
     if (element.checked) {
       temp.features.push(element.value);
     }
@@ -48,10 +48,7 @@ function checkFeatures(filter, features) {
   if (!filter) {
     return true;
   }
-  if (filter.every((feature) => features.indexOf(feature) > -1)) {
-    return true;
-  }
-  return false;
+  return filter.every((feature) => features.indexOf(feature) > -1)
 }
 
 function checkHotelData (element) {
@@ -75,13 +72,13 @@ function checkHotelData (element) {
   return counter === 5;
 }
 function resetFilters () {
-  FILTER_TYPE.value = 'any';
-  FILTER_PRICE.value = 'any';
-  FILTER_GUESTS.value = 'any';
-  FILTER_ROOMS.value = 'any';
-  FILTER_FEATURES_CHECKBOXES.forEach((checkbox) => {
+  filterType.value = 'any';
+  filterPrice.value = 'any';
+  filterGuests.value = 'any';
+  filterRooms.value = 'any';
+  filterFeaturesCheckboxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
 }
 
-export { checkHotelData, FILTERS_FORM, resetFilters };
+export { checkHotelData, filtersForm, resetFilters };

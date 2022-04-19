@@ -1,14 +1,14 @@
-const SUCCESS_TEMPLATE = document.querySelector('#success').content;
-const FAIL_TEMPLATE = document.querySelector('#error').content;
+const successTemplate = document.querySelector('#success').content;
+const failTemplate = document.querySelector('#error').content;
 const body = document.querySelector('body');
 
-const SUCCESS_MESSAGE = SUCCESS_TEMPLATE.cloneNode(true);
-SUCCESS_MESSAGE.querySelector('div.success').style.display = 'none';
-body.appendChild(SUCCESS_MESSAGE);
+const successMessage = successTemplate.cloneNode(true);
+const failMessage = failTemplate.cloneNode(true);
 
-const FAIL_MESSAGE = FAIL_TEMPLATE.cloneNode(true);
-FAIL_MESSAGE.querySelector('div.error').style.display = 'none';
-body.appendChild(FAIL_MESSAGE);
+failMessage.querySelector('div.error').style.display = 'none';
+body.appendChild(failMessage);
+successMessage.querySelector('div.success').style.display = 'none';
+body.appendChild(successMessage);
 
 let shownMessage;
 

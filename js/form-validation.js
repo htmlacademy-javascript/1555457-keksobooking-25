@@ -3,10 +3,10 @@ import { showFailMessage, showSuccessMessage } from './utils/form-tools.js';
 import { sendData } from './server-api.js';
 import { resetFilters } from './utils/map-filters.js';
 
-const OFFER_FORM = document.querySelector('.ad-form');
-const GUESTS_SELECT = OFFER_FORM.querySelector('#capacity');
+const offerForm = document.querySelector('.ad-form');
+const guestsSelect = offerForm.querySelector('#capacity');
 
-const pristine = new Pristine(OFFER_FORM, {
+const pristine = new Pristine(offerForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   successClass: 'ad-form__element--valid',
@@ -16,12 +16,12 @@ const pristine = new Pristine(OFFER_FORM, {
 }, false);
 
 function validateRooms (value) {
-  return ROOMS_VALIDATION_PARAMS[value].indexOf(+GUESTS_SELECT.value) > -1;
+  return ROOMS_VALIDATION_PARAMS[value].indexOf(+guestsSelect.value) > -1;
 }
 
-pristine.addValidator(OFFER_FORM.querySelector('#room_number'), validateRooms, 'Количество комнат не соответствует количеству гостей');
+pristine.addValidator(offerForm.querySelector('#room_number'), validateRooms, 'Количество комнат не соответствует количеству гостей');
 
-OFFER_FORM.addEventListener('submit', (evt) => {
+offerForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   if (pristine.validate()) {
     const FORM_DATA = new FormData(evt.target);
@@ -31,4 +31,4 @@ OFFER_FORM.addEventListener('submit', (evt) => {
 });
 
 
-export { OFFER_FORM };
+export { offerForm };
