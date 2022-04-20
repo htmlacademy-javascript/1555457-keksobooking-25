@@ -1,3 +1,4 @@
+import { loadData } from './server-api.js';
 import { clearForm } from './utils/control-page-state.js';
 import { MIN_PRICE_PARAMS } from './utils/data.js';
 import { DEFAULT_ADDRESS_VALUE } from './utils/data.js';
@@ -14,9 +15,9 @@ const avatarPreview = document.querySelector('.ad-form-header__preview img');
 const hotelPhotoField = document.querySelector('.ad-form__upload input[type=file]');
 const hotelPhotoPreview = document.querySelector('.ad-form__photo');
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
-
 const PRICE_SLIDER = document.querySelector('.ad-form__slider');
+
+
 noUiSlider.create(PRICE_SLIDER, {
   range: {
     min: 0,
@@ -54,6 +55,7 @@ timeout.addEventListener('change', () => {
 clearButton.addEventListener('click', (evt) => {
   evt.preventDefault();
   clearForm();
+  loadData();
 });
 
 avatarField.addEventListener('change', () => {
